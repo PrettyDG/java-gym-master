@@ -20,14 +20,19 @@ public class Timetable {
         timetable.put(trainingSession.getDayOfWeek(), trainingInDay);
     }
 
-    public TreeMap<TimeOfDay, TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
+    public Map<TimeOfDay, TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)'
         return timetable.get(dayOfWeek);
     }
 
     public TrainingSession getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
-        return timetable.get(dayOfWeek).get(timeOfDay);
+        TreeMap<TimeOfDay, TrainingSession> trainingsForDay = timetable.get(dayOfWeek);
+        if (trainingsForDay == null) {
+            return null;
+        }
+
+        return trainingsForDay.get(timeOfDay);
     }
 
     public Map<Coach, Integer> getCountByCoaches() {
